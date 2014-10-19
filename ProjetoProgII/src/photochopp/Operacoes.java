@@ -24,18 +24,17 @@ public class Operacoes {
          for(int i = 0; i < bi.getWidth(); i++){
             for(int j = 0; j < bi.getHeight(); j++){
                int bytes = bi.getRGB(i, j);
-               Color cor = new Color(bytes,true);
-               r = cor.getRed();
-               g = cor.getGreen();
-               b = cor.getBlue();
+               r = bytes >> 16 & 0xFF;
+               g = bytes >> 8 & 0xFF;
+               b = bytes >> 0 & 0xFF;
                
                int rc = 255 - r;
                int gc = 255 - g;
                int bc = 255 - b;
                
-               cor = new Color(rc,gc,bc);
+               bytes = rc << 16 | gc << 8 | bc << 0;
                
-               bi.setRGB(i, j, cor.getRGB());
+               bi.setRGB(i, j, bytes);
             }
         }
         
@@ -53,16 +52,15 @@ public class Operacoes {
         for (int k = 0; k < bi.getWidth(); k++){
             for(int j = 0; j < bi.getHeight(); j++){
                 int bytes = bi.getRGB(k, j);
-                Color cor = new Color(bytes,true);
-                r = cor.getRed();
-                g = cor.getGreen();
-                b = cor.getBlue();
+                r = bytes >> 16 & 0xFF;
+                g = bytes >> 8 & 0xFF;
+                b = bytes >> 0 & 0xFF;
                 
                 i = (int)((0.3 * r) + (0.59 * g) + (0.11 * b));
                 
-                cor = new Color(i,i,i);
+                bytes = i << 16 | i << 8 | i << 0;
                 
-                bi.setRGB(k, j, cor.getRGB());
+                bi.setRGB(k, j, bytes);
             }
         }
         
@@ -84,6 +82,7 @@ public class Operacoes {
         
         for(int i = w.getLength()/2; i < f.getWidth() - w.getLength()/2; i++){
             for(int j = w.getLength()/2; j < f.getHeight() - w.getLength()/2; j++){
+                r = 0; g = 0; b = 0;
                 for(u = -(w.getLength()/2); u <= (w.getLength()/2); u++){
                     for(v = -(w.getLength()/2); v <= (w.getLength()/2); v++){
                         
@@ -93,12 +92,14 @@ public class Operacoes {
                         coordenadaU = u + (w.getLength()/2);
                         coordenadaV = v + (w.getLength()/2);
                         
-                        int bytes = f.getRGB(coordenadaX, coordenadaY);
-                        Color cor1 = new Color(bytes,true);
+                        int bytes1 = f.getRGB(coordenadaX, coordenadaY);
+                        int rc = bytes1 >> 16 & 0xFF;
+                        int gc = bytes1 >> 8 & 0xFF;
+                        int bc = bytes1 >> 0 & 0xFF;
                         
-                        r = (int) (r + (cor1.getRed() * (w.consulta(coordenadaU, coordenadaV))));
-                        g = (int) (g + (cor1.getGreen() * (w.consulta(coordenadaU, coordenadaV))));
-                        b = (int) (b + (cor1.getBlue() * (w.consulta(coordenadaU, coordenadaV))));
+                        r = r + (int) (rc * (w.consulta(coordenadaU, coordenadaV)));
+                        g = g + (int) (gc * (w.consulta(coordenadaU, coordenadaV)));
+                        b = b + (int) (bc * (w.consulta(coordenadaU, coordenadaV)));
                         
                 }
         }
@@ -110,12 +111,8 @@ public class Operacoes {
                 if(b > 255){b = 255;}
                 else if(b < 0){b = 0;}
                 
-                r = r/2;
-                g = g/2;
-                b = b/2;
-                
-                Color cor2 = new Color(r, g, b);
-                f.setRGB(i, j, cor2.getRGB());        
+                int bytes2 = r << 16 | g << 8 | b << 0;
+                f.setRGB(i, j, bytes2);        
         }
           
     }

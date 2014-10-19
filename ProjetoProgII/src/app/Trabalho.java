@@ -24,8 +24,8 @@ public class Trabalho {
     public static void main (String [] args){
         try{
  
-        File flIn = new File("C:\\Users\\EDUARDO\\Desktop\\cão.png");
-        File flOut = new File("C:\\Users\\EDUARDO\\Desktop\\foto1Cão.png");
+        File flIn = new File("C:\\Users\\EDUARDO\\Desktop\\fofos.jpg");
+        File flOut = new File("C:\\Users\\EDUARDO\\Desktop\\fofosC.jpg");
         BufferedImage input = ImageIO.read(flIn);
         
         
@@ -43,39 +43,12 @@ public class Trabalho {
             {0, 0, 0}
         }; 
         
-        double [] [] matrizAgucar = new double [] []{
-            {0, 0, 0, 0, 0},
-            {0, 0, -1, 0, 0},
-            {0,-1, 5, -1, 0},
-            {0, 0, -1, 0, 0},
-            {0, 0, 0, 0, 0}
-        };
-        
-        double [] [] matrizDetectar = new double [] []{
-            {0, 1, 0},
-            {1, -4, 1},
-            {0, 1, 0}
-        };
-        
-        double [] [] matrizDestacar = new double [] []{
-            {-2, -1, 0},
-            {-1, 1, 1},
-            {0, 1, 2}
-        };
-       
-       
         Filtro fGauss = new Filtro(matrizFiltroGaussiano, matrizFiltroGaussiano.length);
         Filtro fRealcarBordas = new Filtro(matrizRealcarBordas, matrizRealcarBordas.length);
-        Filtro fAgucar = new Filtro(matrizAgucar, matrizAgucar.length);
-        Filtro fDetectar = new Filtro (matrizDetectar, matrizDetectar.length);
-        Filtro fDestacar = new Filtro (matrizDestacar, matrizDestacar.length);
         //BufferedImage output = complemento(input);
         //BufferedImage output = rgbParaCinza(input);
-        //BufferedImage output = convolucao (input, fGauss); //Funcionando
-        BufferedImage output = convolucao(input, fRealcarBordas); //Funcionando
-        //BufferedImage output = convolucao(input, fDetectar); //Não está funcionando
-        //BufferedImage output = convolucao(input, fAgucar); //Funcionanado
-        //BufferedImage output = convolucao(input, fDestacar); //Não está funcionando
+        BufferedImage output = convolucao (input, fGauss); //Funcionando
+        //BufferedImage output = convolucao(input, fRealcarBordas); //Funcionando
         ImageIO.write(output, "jpg", flOut);
         
         //String operacao = args[0];
