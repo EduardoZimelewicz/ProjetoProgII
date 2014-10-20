@@ -10,10 +10,10 @@ package photochopp;
  * @author EDUARDO
  */
 public class Filtro {
-    private double [] [] matrizDoFiltro;
+    protected double [] [] matrizDoFiltro;
        
-    public Filtro(double [] [] matrizDoFiltro, int tamanho){
-        if(tamanho % 2 == 0){
+    public Filtro(double [] [] matrizDoFiltro){
+        if(matrizDoFiltro.length % 2 == 0){
             throw new IllegalArgumentException("O matriz do filtro deve ter um tamanho ímpar!");
         }
         this.matrizDoFiltro = matrizDoFiltro;

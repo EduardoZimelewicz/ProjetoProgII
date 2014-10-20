@@ -43,8 +43,8 @@ public class Trabalho {
             {0, 0, 0}
         }; 
         
-        Filtro fGauss = new Filtro(matrizFiltroGaussiano, matrizFiltroGaussiano.length);
-        Filtro fRealcarBordas = new Filtro(matrizRealcarBordas, matrizRealcarBordas.length);
+        Filtro fGauss = new Filtro(matrizFiltroGaussiano);
+        Filtro fRealcarBordas = new Filtro(matrizRealcarBordas);
         //BufferedImage output = complemento(input);
         //BufferedImage output = rgbParaCinza(input);
         BufferedImage output = convolucao (input, fGauss); //Funcionando
