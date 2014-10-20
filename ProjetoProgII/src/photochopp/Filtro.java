@@ -23,7 +23,6 @@ public class Filtro {
         return this.matrizDoFiltro.length;
     }
     
-    
     public double consulta(int l, int m){
         return this.matrizDoFiltro[l][m];
     }
